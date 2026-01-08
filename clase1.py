@@ -132,4 +132,4 @@
 # lista_numeros.sort() #sort ordena la lista de menor a mayor
 # lista_numeros.reverse() #reverse invierte el orden de la lista
 # lista_numeros.clear() #clear elimina todos los elementos de la lista
-# print(lista_numero
+# print(lista_numero)
