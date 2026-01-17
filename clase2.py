@@ -83,9 +83,9 @@
 #         print(i)
  
 "FUNCIONES BASICAS"
-# def saludar():
-#     print("Hola Mundo")
-# saludar()
+#def saludar():
+#    print("Hola Mundo")
+#saludar()
 #----------------O-------------------
 #def saludar(name):
 #    print("Hola",name)
