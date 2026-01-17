@@ -124,21 +124,21 @@
 #     print(e)
 
 "POO - Encapsulamiento"
-class Persona:
-    def __init__(self, nombre, edad):
-        self.nombre = nombre
-        self.edad = edad
-    def __str__(self):
-        return f"Hola mi nombre es {self.nombre} y tengo {self.edad} años"
-persona1 = Persona("Jean", 25)
-print(persona1)
+# class Persona:
+#     def __init__(self, nombre, edad):
+#         self.nombre = nombre
+#         self.edad = edad
+#     def __str__(self):
+#         return f"Hola mi nombre es {self.nombre} y tengo {self.edad} años"
+# persona1 = Persona("Jean", 25)
+# print(persona1)
 
-class Empleado(Persona):
-    def comparar_edades(self, edad2):
-        return self.edad == edad2
-empleado1 = Empleado("Carlos", 50) #compara con ese numero
-print(empleado1.comparar_edades(30))
-print(empleado1.comparar_edades(25))
+# class Empleado(Persona):
+#     def comparar_edades(self, edad2):
+#         return self.edad == edad2
+# empleado1 = Empleado("Carlos", 50) #compara con ese numero
+# print(empleado1.comparar_edades(30))
+# print(empleado1.comparar_edades(25))
 
 # __init__()   # constructor
 # __str__()    # print(obj)
