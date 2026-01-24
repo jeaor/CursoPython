@@ -1,0 +1,6 @@
+Nombre,Dirección,Dimensiones,Área,Precio
+Casa 1,Calle 123,10.1*20.0,202.00,303000.00
+Casa 2,Calle 456,6.8*20.0,136.00,204000.00
+Casa 3,Calle 789,10.1*18.0,181.80,272700.00
+Casa 4,Av. Central,9.5*22.0,209.00,313500.00
+Casa 5,Jr. Lima,8.0*15.0,120.00,180000.00
