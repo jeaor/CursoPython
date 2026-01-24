@@ -1,3 +1,4 @@
+# import os  para ver si exise el archivo
 # class PropiedadInmobiliaria:
 #     def __init__(self, name: str, address: str, dimensiones: str,
 #                  withSize: float, heightSize: float, precioUnit: float):
@@ -94,4 +95,18 @@
 # "Añadir"
 # with open("C://CURSO PYTHON//leer.txt",mode='a') as file:
 #     file.write("\nHola Mundo")
+
+# "para ver si el archivo existe"
+# print(os.path.exists("C://CURSO PYTHON//leer.txt"))
+
+# "para ver si el archivo es un archivo"
+# print(os.path.isfile("C://CURSO PYTHON//leer.txt"))
+
+# "para ver si el archivo es una carpeta"
+# print(os.path.isdir("C://CURSO PYTHON//leer.txt"))
+
+# "para ver si el archivo es un enlace simbolico"
+# print(os.path.islink("C://CURSO PYTHON//leer.txt"))
+
+
     
