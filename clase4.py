@@ -1,4 +1,4 @@
-# import os  para ver si exise el archivo
+# import os
 # class PropiedadInmobiliaria:
 #     def __init__(self, name: str, address: str, dimensiones: str,
 #                  withSize: float, heightSize: float, precioUnit: float):
@@ -107,6 +107,5 @@
 
 # "para ver si el archivo es un enlace simbolico"
 # print(os.path.islink("C://CURSO PYTHON//leer.txt"))
-
 
     
