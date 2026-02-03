@@ -1,4 +1,5 @@
 import sqlite3
+import os
 class ConfigBd():
 
     def __init__(self):
@@ -7,7 +8,15 @@ class ConfigBd():
         self.bd=self.createBd()
         self.populate() # seed
     def createBd(self):
-        conn = sqlite3.connect('bd-si.db')
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        db_path = os.path.join(base_dir, "..", "bd-si.db")
+
+        conn = sqlite3.connect(db_path)
+
+        # 🔑 ACTIVAR CLAVES FORÁNEAS
+        conn.execute("PRAGMA foreign_keys = ON")
+
+        print("📂 DB usada:", db_path)
         return conn
     def discontecBd(self):
         if self.bd:

@@ -83,7 +83,7 @@ def getMenu(conn:Connection):
                 # Determinar qué menú mostrar según el tipo de usuario
                 #tipo_usuario = ['admin',"ventas"]
                 #random_element = random.choice(tipo_usuario)   
-                WelcomeUser(login['user'],emailService)
+                # WelcomeUser(login['user'],emailService)
                 if type_user == "admin":
                     getMenuAdmin()
                 elif type_user == "ventas":
