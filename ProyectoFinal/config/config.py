@@ -5,19 +5,22 @@ class ConfigBd():
     def __init__(self):
         self.bd = self.createBd()
         self.createDatabase() #migration
-        self.bd=self.createBd()
+        # self.bd=self.createBd()
         self.populate() # seed
     def createBd(self):
-        base_dir = os.path.dirname(os.path.abspath(__file__))
-        db_path = os.path.join(base_dir, "..", "bd-si.db")
-
-        conn = sqlite3.connect(db_path)
-
-        # 🔑 ACTIVAR CLAVES FORÁNEAS
-        conn.execute("PRAGMA foreign_keys = ON")
-
-        print("📂 DB usada:", db_path)
+        conn = sqlite3.connect("bd-si.db")
         return conn
+        # db_path = os.path.abspath("bd-si.db")
+        # conn = sqlite3.connect(db_path)
+        # conn.execute("PRAGMA foreign_keys = ON")
+        # print("📂 DB usada:", db_path)
+        # return conn
+        # conn = sqlite3.connect("bd-si.db")
+        # # 🔑 ACTIVAR CLAVES FORÁNEAS
+        # conn.execute("PRAGMA foreign_keys = ON")
+
+        # print("📂 DB usada:", conn)
+        # return conn
     def discontecBd(self):
         if self.bd:
             self.bd.close()
@@ -174,16 +177,16 @@ class ConfigBd():
             print(f"❌ Error al crear la base de datos: {e}")
             self.bd.rollback()
             return False
-        finally:
-            self.discontecBd()
     def populate(self):
+        print("Se entro al populate ")
         """Función simple para poblar las tablas con datos del archivo datos.txt"""
         cursor = self.bd.cursor()
         
         try:
+            if os.path.exists('config/datoss.txt'):
             # Leer el archivo de datos
-            with open('config/datos.txt', 'r', encoding='utf-8') as file:
-                content = file.read()
+                with open('config/datoss.txt', 'r', encoding='utf-8') as file:
+                    content = file.read()
             
             # Poblar usuarios_sistema
             usuarios_data = [
@@ -191,14 +194,16 @@ class ConfigBd():
                 ('carlos.rivas@sistema.com', 'password456', 'Carlos', 'Rivas', 'ventas', 1),
                 ('lucia.perez@sistema.com', 'password678', 'Lucia', 'Perez', 'ventas', 1),
                 ('marco.diaz@sistema.com', 'password901', 'Marco', 'Diaz', 'admin', 0),
+                
+                #mi dato
+                ('jean.ortiz@sistema.com', 'password848', 'Jean', 'Ortiz', 'admin', 1),
             ]
             
             cursor.executemany('''
                 INSERT OR REPLACE INTO usuarios_sistema 
                 (email, password, nombre, apellido, tipo_usuario, estado)
                 VALUES (?, ?, ?, ?, ?, ?)
-            ''', usuarios_data)
-            
+            ''', usuarios_data)       
             # Poblar clientes
             clientes_data = [
                 ('Juan', 'Gomez', 'juan.gomez@mail.com', '999111222', 'DNI00000001', 'activo'),
@@ -281,7 +286,7 @@ class ConfigBd():
                 VALUES (?, ?, ?, ?, ?, ?)
             ''', documentos_data)
             
-            # Confirmar cambios
+            # Confirmar cambios 
             self.bd.commit()
             print("✅ Datos poblados correctamente")
             
@@ -305,4 +310,8 @@ class ConfigBd():
             print(f"❌ Error al poblar datos: {e}")
             self.bd.rollback()
             return False
-    
+        
+    def discontecBd(self):
+        if self.bd:
+            self.bd.close()
+            print("Conexion cerrada")

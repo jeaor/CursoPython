@@ -37,9 +37,10 @@ from rich import box
 import pyfiglet
 from config.config import ConfigBd
 import random
-from usuarios.userservices import Login,WelcomeUser
+from UsuariosFinal.userservices import Login,WelcomeUser
 from sqlite3 import Connection
 from config.email import EmailService
+from services.SiServices import SistInmobiliaria
 console = Console()
 config = ConfigBd()
 conn = config.bd
@@ -59,11 +60,12 @@ def getMenu(conn:Connection):
         # Opciones del menú (sin tabla)
         console.print("[bold cyan]═══════════════════════════════════════[/bold cyan]")
         console.print("[bold white]  1.[/bold white] [green]Login[/green]")
-        console.print("[bold white]  2.[/bold white] [red]Salir[/red]")
+        console.print("[bold white]  2.[/bold white] [blue]Sistema Inmobiliario(PRODUCTOS)[/blue]")
+        console.print("[bold white]  3.[/bold white] [red]Salir[/red]")
         console.print("[bold cyan]═══════════════════════════════════════[/bold cyan]")
         console.print()
         
-        opcion = Prompt.ask("Seleccione una opción", choices=["1", "2"], default="1")
+        opcion = Prompt.ask("Seleccione una opción", choices=["1", "2", "3"], default="1")
         if opcion == "1":
             # Proceso de login
             console.print("\n[bold yellow]Ingreso al Sistema[/bold yellow]")
@@ -94,6 +96,8 @@ def getMenu(conn:Connection):
                 console.input("\nPresione Enter para continuar...")
                 
         elif opcion == "2":
+            SistInmobiliaria(conn)
+        else:
             if Confirm.ask("\n¿Está seguro que desea salir?"):
                 console.print("\n[bold green]¡Hasta luego![/bold green]")
                 break
@@ -168,7 +172,11 @@ def getMenuSale():
 if __name__ == "__main__":
     try:
         getMenu(conn)
-    except KeyboardInterrupt:
-        console.print("\n[bold red]Programa interrumpido por el usuario[/bold red]")
-    except Exception as e:
-        console.print(f"\n[bold red]Error: {e}[/bold red]")
+    finally:
+        conn.close()
+    # try:
+    #     getMenu(conn)
+    # except KeyboardInterrupt:
+    #     console.print("\n[bold red]Programa interrumpido por el usuario[/bold red]")
+    # except Exception as e:
+    #     console.print(f"\n[bold red]Error: {e}[/bold red]")

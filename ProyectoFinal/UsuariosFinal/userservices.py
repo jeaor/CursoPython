@@ -5,8 +5,8 @@ from config.email import EmailService
 
 def getUser(email:str,con:Connection):
     cursor = con.cursor()
-    query = "select * from user where email = ?"
-    result= cursor.execute(query,email)
+    query = "select * from usuarios_sistema where email = ?"
+    result= cursor.execute(query,(email,))
     data= result.fetchone()
     return data
 
@@ -35,5 +35,3 @@ def WelcomeUser(email:str,emailService:EmailService):
         emailService.send_email(email,"Bienvenido",f"Bienvenido {email}")
     except Exception as e:
         print("e",e)
-    
-#marco.diaz@sistema.com
