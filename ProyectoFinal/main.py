@@ -117,23 +117,17 @@ def getMenuAdmin():
         table.add_column("Opción", style="cyan", justify="center")
         table.add_column("Descripción", style="white")
         
-        table.add_row("1", "Gestión de Usuarios")
-        table.add_row("2", "Gestión de Propiedades")
-        table.add_row("3", "Reportes Financieros")
-        table.add_row("4", "Dashboard")
-        table.add_row("0", "Cerrar Sesión")
+        table.add_row("1", "Gestión de Producto(creado)")
+        table.add_row("0", "Salir")
         
         console.print(table)
         
         opcion = Prompt.ask("Seleccione una opción", choices=["0", "1", "2", "3", "4"])
         
-        if opcion == "0":
-            console.print("\n[yellow]Cerrando sesión...[/yellow]")
-            break
+        if opcion == "1":
+            SistInmobiliaria(conn)
         else:
-            console.print(f"\n[bold blue]Función pendiente de implementar: Opción {opcion}[/bold blue]")
-            console.input("Presione Enter para continuar...")
-            pass
+            break
 
 def getMenuSale():
     """Menú para personal de ventas"""

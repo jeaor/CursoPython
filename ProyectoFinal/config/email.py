@@ -12,11 +12,12 @@ class EmailService:
     def __init__(self):
         # Configuración Mailtrap
         self.smtp_server = "sandbox.smtp.mailtrap.io"
-        self.smtp_port = 2525
-        self.username = "29820646eeb8eb"
-        self.password = "298f6a0f84e21e"
+        self.smtp_port = 587
+        self.username = "0dc5c0e52a4a15"
+        self.password = "51d75870bd0836"
         self.sender_email = "sistema@datux.com"
         self.sender_name = "Sistema Inmobiliario DATUX"
+        self.admin_email = "admin@gmail.com"
     
     def send_email(self, to_email, subject, message, html_message=None, attachments=None):
         """
@@ -50,7 +51,7 @@ class EmailService:
                 msg.attach(part_html)
             
             # Agregar archivos adjuntos si se proporcionan
-            if attachments:
+            if attachments is not None and isinstance(attachments, list):
                 for file_path in attachments:
                     if os.path.exists(file_path):
                         self._attach_file(msg, file_path)
@@ -58,11 +59,12 @@ class EmailService:
                         print(f"⚠️ Archivo no encontrado: {file_path}")
             
             # Enviar correo
-            with smtplib.SMTP(self.smtp_server, self.smtp_port) as server:
+            with smtplib.SMTP(self.smtp_server, self.smtp_port, timeout=30) as server:
+                server.ehlo()
                 server.starttls()
+                server.ehlo()
                 server.login(self.username, self.password)
-                text = msg.as_string()
-                server.sendmail(self.sender_email, to_email, text)
+                server.sendmail(self.sender_email, to_email, msg.as_string())
             
             print(f"✅ Correo enviado exitosamente a {to_email}")
             return True
@@ -182,6 +184,18 @@ class EmailService:
     """
         
         return self.send_email(to_email, subject, message)
+    
+    def send_producto_email(self,id_producto, codigo_producto, titulo, html_message=None, attachments=None):
+        subject = "Informacion del producto"
+        message = f"""
+            Hola buenas tardes,
+            Consulta de su producto:
+            - IdProducto: {id_producto}
+            - Codigo: {codigo_producto}
+            - Titulo: {titulo}
+            Saludos
+        """
+        return self.send_email(to_email=self.admin_email,subject=subject, message=message)
 
 # Funciones de conveniencia para uso rápido
 def send_simple_email(to_email, subject, message):
@@ -206,7 +220,7 @@ if __name__ == "__main__":
     
     # Enviar correo simple
     resultado = email_service.send_email(
-        to_email="cliente@example.com",
+        to_email="jean.ortiz@sistema.com",
         subject="Prueba de Sistema DATUX",
         message="Este es un mensaje de prueba del sistema inmobiliario DATUX."
     )
@@ -215,3 +229,5 @@ if __name__ == "__main__":
         print("Correo enviado exitosamente")
     else:
         print("Error al enviar correo")
+
+

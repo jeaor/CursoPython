@@ -13,13 +13,13 @@ class ConfigBd():
         # db_path = os.path.abspath("bd-si.db")
         # conn = sqlite3.connect(db_path)
         # conn.execute("PRAGMA foreign_keys = ON")
-        # print("📂 DB usada:", db_path)
+        # print("DB usada:", db_path)
         # return conn
         # conn = sqlite3.connect("bd-si.db")
-        # # 🔑 ACTIVAR CLAVES FORÁNEAS
+        # # ACTIVAR CLAVES FORÁNEAS
         # conn.execute("PRAGMA foreign_keys = ON")
 
-        # print("📂 DB usada:", conn)
+        # print(" DB usada:", conn)
         # return conn
     def discontecBd(self):
         if self.bd:

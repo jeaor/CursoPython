@@ -6,6 +6,7 @@ from rich.table import Table
 from rich.panel import Panel
 from rich.text import Text
 from rich import box
+from config.email import EmailService
 
 console = Console()
 
@@ -47,6 +48,7 @@ def all_productos(conn:Connection):
     console.print(table)
     
     console.input("[bold red]Presione enter para salir[/bold red]")
+    SistInmobiliaria(conn)
 def all_productos_especifico(conn:Connection):
     console.print("[bold red] PRODUCTOS [/bold red]")
     id_producto = int(Prompt.ask("[bold blue]Ingrese el id del producto a buscar[/bold blue]"))
@@ -74,12 +76,15 @@ def all_productos_especifico(conn:Connection):
     console.print(table)
     console.input("\nPresione Enter para salir")
     
-    # #EMAIL
-    # subject = "Consulta del producto"
-    # mensaje = f"""
-    # Se ha encontrado el producto.
+    console.print("Enviando el correo.........")
     
-    # ID: {producto1[0]}
-    # Codigo: {producto1[1]}
-    # Titulo: {producto1[2]}
-    # """
+    email_service = EmailService()
+    enviado = email_service.send_producto_email(
+        producto1[0],
+        producto1[1],
+        producto1[2]
+    )
+    if enviado:
+        console.print("[bold green]Correo enviado[/bold green]")
+    else:
+        console.print("[bold red]Correo no enviado[/bold red]")
