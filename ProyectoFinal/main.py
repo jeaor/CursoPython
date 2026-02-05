@@ -160,7 +160,7 @@ def getMenuSale():
             break
         else:
             console.print(f"\n[bold blue]Función pendiente de implementar: Opción {opcion}[/bold blue]")
-            console.input("Presione Enter para continuar...")
+            console.input("Presione Enter para continuar....")
             pass
 
 if __name__ == "__main__":
